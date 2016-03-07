@@ -31,6 +31,6 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
 		'abstract'     => $faker->paragraph(1),
 		'content'      => $faker->paragraph(5),
 		'published_at' => $faker->dateTime('now'),
-		'slug' 		   => $faker->title,
+		'slug' 		   => $title,
     ];
 });

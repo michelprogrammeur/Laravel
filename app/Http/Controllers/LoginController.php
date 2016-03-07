@@ -12,6 +12,11 @@ use Auth;
 class LoginController extends Controller
 {
     public function login(Request $request){
+
+    	if(Auth::check()) {
+    		return redirect()->intended('dashboard');
+    	} 
+
     	//dd($request->all());
 		if($request->isMethod('post')) {
 
@@ -38,6 +43,10 @@ class LoginController extends Controller
     		return view('auth.login');
     	}
     }
+    public function logout() {
+    	Auth::logout();
 
+    	return redirect('/');
+    }
 
 }

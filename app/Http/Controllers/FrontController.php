@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 
 use Mail;
 
+use App\Cart\Cart;
+
 class FrontController extends Controller
 {
     public function index() {
@@ -73,4 +75,20 @@ class FrontController extends Controller
 		return view('front.dashboard');
     }
 
+    public function storeProduct(Request $request, Cart $cart)
+    {
+        $this->validate($request, [
+            'id'       => 'required|integer',
+            'quantity' => 'required|integer',
+            
+        ]);
+        $product = Product::find($request->input('id'));
+        $cart->buy($product, $request->input('quantity'));
+        //dd($cart);
+    }
+
+    public function examplePhpunit($a, $b) {
+        //var_dump($a+$b);
+        return $a + $b;
+    }
 }

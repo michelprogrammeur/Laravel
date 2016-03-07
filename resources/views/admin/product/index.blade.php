@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@if(Session::has('message'))
+	<span class="warming {{Session::get('alert')}}"> {{Session::get('message')}}</span>
+@endif
+
 @section('content')
 	<p><a href="{{ url('product/create') }}">Create product</a></p>
 
@@ -21,7 +25,7 @@
 	    @foreach($products as $product)
 	        <tr class="titles-cell">
 	        	<td>{{ $product->status }}</td>
-	        	<td>{{ $product->title }}</td>
+	        	<td><a href="{{url('product', [$product->id, 'edit'])}}">{{ $product->title }}</a></td>
 	        	<td>{{ $product->price }} €</td>
 	        	<td>{{ $product->quantity }}</td>
 	        	<td>{{ $product->published_at }}</td>
@@ -36,7 +40,7 @@
 					</ul>
 				</td>
 	        	<td>
-	        		<form methode="post" action="{{ url('product', $product->id) }}">
+	        		<form method="post" action="{{ url('product', $product->id) }}">
 	        			{{ method_field('DELETE') }} <!--champ hidden _method value DELETE -->
 
 	        			{{ csrf_field() }}

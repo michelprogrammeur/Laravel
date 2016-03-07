@@ -10,12 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/', 'FrontController@index');
+use App\Cart\Cart;
 
-Route::get('prod/{id}/{slug?}', 'FrontController@show');
-
-Route::get('cat/{id}/{slug?}', 'FrontController@showProductByCategory');
-
+Route::get('test', function(Cart $cart) {
+	dd($cart);
+});
 
 Route::pattern('id', '[1-9][0-9]*');
 Route::pattern('slug', '[a-z0-9-\_]+');
@@ -34,11 +33,24 @@ Route::pattern('slug', '[a-z0-9-\_]+');
 */
 
 Route::group(['middleware' => ['web']], function () {
+	Route::get('/', 'FrontController@index');
+
+	Route::get('prod/{id}/{slug?}', 'FrontController@show');
+
+	Route::get('test/{a}/{b}', 'FrontController@examplePhpunit');
+
+	Route::get('cat/{id}/{slug?}', 'FrontController@showProductByCategory');
+
     Route::get('contact', 'FrontController@showContact');
 	Route::post('send', 'FrontController@sendContact');
 	
+	Route::any('login', 'LoginController@login'); // get et post
+	Route::get('logout', 'LoginController@logout'); // get et post
+
+	Route::post('command', 'FrontController@storeProduct');
+	
 	Route::group(['middleware' => ['auth']], function () {
-		Route::any('login', 'LoginController@login'); // get et post
+		
 		Route::get('dashboard', 'FrontController@dashboard');
 
 		Route::resource('product','ProductController');

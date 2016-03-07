@@ -23,4 +23,19 @@
 		@endforelse
 	</div>
 
+	<form class="option-commande" method="post" action="{{url('command')}}">
+
+		{{csrf_field()}}
+
+		<input type="hidden" value="{{$product->id}}" name="id">
+		<input type="hidden" value="{{$product->price}}" name="price">
+
+		<p>Votre quantité</p>
+		<select name="quantity">
+			@for($i = 0; $i < $product->quantity + 1; $i++)
+				<option>{{$i}}</option>
+			@endfor
+		</select>
+		<input type="submit" value="Ajouter au panier">
+	</form>
 @stop

@@ -17,6 +17,9 @@
 	
 
 	<div id="main">
+		<div class="show-alert">
+			@include('partials.flash')
+		</div>
 		<div class="content">
 			@yield('content')  <!-- blade -->
 		</div>

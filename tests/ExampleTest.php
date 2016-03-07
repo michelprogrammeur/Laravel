@@ -13,7 +13,14 @@ class ExampleTest extends TestCase
      */
     public function testBasicExample()
     {
-        $this->visit('/')
-             ->see('Laravel 5');
+        $this->assertEquals(1,1);
+    }
+
+    public function testMethodExampleArg() {
+        $res = $this->action('GET', 'FrontController@examplePhpunit', ['a'=>1,'b'=>2]);
+
+        $this->assertEquals($res->status(), '200');
+
+        $this->assertEquals(3, $res->content());
     }
 }

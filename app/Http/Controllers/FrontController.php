@@ -13,9 +13,19 @@ use App\Http\Controllers\Controller;
 use Mail;
 
 use App\Cart\Cart;
+use Bar;
 
 class FrontController extends Controller
 {
+
+    public function __construct(Cart $cart)
+    {
+        parent::__construct();
+
+        $this->cart = $cart;
+
+    }
+
     public function index() {
 
     	$products = Product::with('tags', 'picture', 'category')->paginate(10);
@@ -75,20 +85,54 @@ class FrontController extends Controller
 		return view('front.dashboard');
     }
 
-    public function storeProduct(Request $request, Cart $cart)
+    public function storeProduct(Request $request)
     {
         $this->validate($request, [
             'id'       => 'required|integer',
             'quantity' => 'required|integer',
+            'price'    => 'required|numeric',
             
         ]);
         $product = Product::find($request->input('id'));
-        $cart->buy($product, $request->input('quantity'));
-        //dd($cart);
+        $this->cart->buy($product, $request->input('quantity'));
+
+        return back();
     }
 
-    public function examplePhpunit($a, $b) {
-        //var_dump($a+$b);
-        return $a + $b;
+    public function reset() {
+        $this->cart->reset();
+
+        return back();
     }
+
+    public function total() {
+        $this->cart->total();
+    }
+
+    public function restoreProduct($id) {
+        $this->cart->restore($id);
+
+        return redirect('cart')->with('message', 'product restore');
+    }
+
+    public function showCart() {
+        $cart = $this->cart->get();
+
+        $products = [];
+
+        foreach ($cart as $id => $total) {
+            $p = Product::find($id);
+            $products[] = [
+                'id'       => $p->id,
+                'name'     => $p->title, 
+                'price'    => $p->price, 
+                'quantity' => $p->quantity,
+                'total'    => $total['total'],
+            ];
+        }
+
+        $total = $this->cart->total();
+
+        return view('front.cart', compact('products', 'total'));
+    }    
 }

@@ -32,7 +32,7 @@
 
 		<p>Votre quantité</p>
 		<select name="quantity">
-			@for($i = 0; $i < $product->quantity + 1; $i++)
+			@for($i = 1; $i < $product->quantity + 1; $i++)
 				<option>{{$i}}</option>
 			@endfor
 		</select>

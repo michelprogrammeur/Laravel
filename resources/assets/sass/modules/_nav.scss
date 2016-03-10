@@ -1,0 +1,19 @@
+
+@import "variables";
+
+.navbar {
+	width: 100%;
+	height: 80px;
+	background-color: #eeeeee;
+	li {
+		width: 100px;
+		display: inline-block;
+		a {
+			padding: 6px 12px; 
+			text-decoration: none; 
+			font-size: 20px;
+			color: $navLinkColor;  
+		} 
+	}
+}
+

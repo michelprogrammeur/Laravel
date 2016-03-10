@@ -59,4 +59,5 @@ class Product extends Model
     public function getTitleAttribute($value) {
         return ucfirst($value);
     }
+
 }

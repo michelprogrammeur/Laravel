@@ -3,7 +3,7 @@
 
 @section('sidebar')
 	@parent
-	<p>home page</p>
+	<p id="home">home page</p>
 @stop
 
 @section('content')
@@ -36,3 +36,4 @@
 
 	{!! $products->links() !!}
 @stop
+

@@ -38,6 +38,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::any('login', 'LoginController@login'); // get et post
 	Route::get('logout', 'LoginController@logout'); // get et post
 	Route::post('command', 'FrontController@storeProduct');
+	Route::post('storeCommand', 'FrontController@commandCart');
 
 	Route::get('cart', 'FrontController@showCart');
 	

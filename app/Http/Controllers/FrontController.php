@@ -14,6 +14,7 @@ use Mail;
 
 use App\Cart\Cart;
 use Bar;
+use App\History;
 
 class FrontController extends Controller
 {
@@ -134,5 +135,35 @@ class FrontController extends Controller
         $total = $this->cart->total();
 
         return view('front.cart', compact('products', 'total'));
-    }    
+    }   
+
+    public function commandCart(Request $request) {
+
+        $this->validate($request, [
+            'product_id.*' => 'integer|required',
+            'quantity.*'   => 'integer|required',
+        ]);
+
+        foreach($request->input('product_id') as $productId) {
+
+            $quantity = $request->input('quantity'.$productId);
+            $history = History::create([
+                'product_id' => $productId,
+                'quantity' => $quantity,
+            ]);
+
+            $stock = $history->product->quantity;
+
+            if ($stock >= $quantity) {
+                $history->product->quantity -= $quantity;
+            }else {
+                $history->product->quantity = 0;
+            }
+            $history->product->save();
+
+            $this->cart->reset();
+
+            return redirect('/')->with('message', 'success command');
+        }
+    }
 }

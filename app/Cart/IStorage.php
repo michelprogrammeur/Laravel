@@ -15,4 +15,6 @@ interface IStorage {
 	function get();
 
 	function reset();
+
+	function count();
 }

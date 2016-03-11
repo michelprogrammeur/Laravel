@@ -11,28 +11,21 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Mail;
-
-use App\Cart\Cart;
-use Bar;
-use App\History;
+use Cache;
 
 class FrontController extends Controller
 {
 
-    public function __construct(Cart $cart)
-    {
-        parent::__construct();
-
-        $this->cart = $cart;
-
-    }
-
     public function index() {
 
-    	$products = Product::with('tags', 'picture', 'category')->paginate(10);
+        if(Cache::has('products')) {
+            $products = Cache::get('products');
+        }else {
+            $products = Product::with('tags', 'picture', 'category')->paginate(10);
+            Cache::put('products', $products, 1); 
+        }
 
     	return view('front.index', compact('products'));
-
     }
 
     public function show($id, $slug=''){
@@ -74,7 +67,6 @@ class FrontController extends Controller
 
     	});
 
-
     	return redirect('contact')->with([
     		'message' => "message envoyé !",
     		'alert'   => 'success',
@@ -82,88 +74,7 @@ class FrontController extends Controller
     }
 
     public function dashboard(){
-    	//dd($request->all());
+
 		return view('front.dashboard');
-    }
-
-    public function storeProduct(Request $request)
-    {
-        $this->validate($request, [
-            'id'       => 'required|integer',
-            'quantity' => 'required|integer',
-            'price'    => 'required|numeric',
-            
-        ]);
-        $product = Product::find($request->input('id'));
-        $this->cart->buy($product, $request->input('quantity'));
-
-        return back();
-    }
-
-    public function reset() {
-        $this->cart->reset();
-
-        return back();
-    }
-
-    public function total() {
-        $this->cart->total();
-    }
-
-    public function restoreProduct($id) {
-        $this->cart->restore($id);
-
-        return redirect('cart')->with('message', 'product restore');
-    }
-
-    public function showCart() {
-        $cart = $this->cart->get();
-
-        $products = [];
-
-        foreach ($cart as $id => $total) {
-            $p = Product::find($id);
-            $products[] = [
-                'id'       => $p->id,
-                'name'     => $p->title, 
-                'price'    => $p->price, 
-                'quantity' => $p->quantity,
-                'total'    => $total['total'],
-            ];
-        }
-
-        $total = $this->cart->total();
-
-        return view('front.cart', compact('products', 'total'));
-    }   
-
-    public function commandCart(Request $request) {
-
-        $this->validate($request, [
-            'product_id.*' => 'integer|required',
-            'quantity.*'   => 'integer|required',
-        ]);
-
-        foreach($request->input('product_id') as $productId) {
-
-            $quantity = $request->input('quantity'.$productId);
-            $history = History::create([
-                'product_id' => $productId,
-                'quantity' => $quantity,
-            ]);
-
-            $stock = $history->product->quantity;
-
-            if ($stock >= $quantity) {
-                $history->product->quantity -= $quantity;
-            }else {
-                $history->product->quantity = 0;
-            }
-            $history->product->save();
-
-            $this->cart->reset();
-
-            return redirect('/')->with('message', 'success command');
-        }
     }
 }

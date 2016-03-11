@@ -2,7 +2,7 @@
 
 namespace App\Cart;
 
-class Cart 
+class Cart implements \Countable
 {
 	protected $storage;
 	private $cart;
@@ -33,6 +33,10 @@ class Cart
 	public function total()
     {
         return $this->storage->total();
+    }
+
+    public function count() {
+    	return $this->storage->count();
     }
 }
 

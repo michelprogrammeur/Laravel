@@ -23,7 +23,7 @@
 		@endforelse
 	</div>
 
-	<form class="option-commande" method="post" action="{{url('command')}}">
+	<form class="option-commande" method="post" action="{{url('cart/command')}}">
 
 		{{csrf_field()}}
 

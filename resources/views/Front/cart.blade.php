@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<form class="form-panier" method="POST" action="{{url('storeCommand')}}">
+<form class="form-panier" method="POST" action="{{url('cart/store')}}">
     {{csrf_field()}}
     <ul class="showCartProduct">
         <div>
@@ -15,7 +15,7 @@
                 <li>{{$product['total']}}</li> 
                 <li>
                     <label for="reset{{$product['id']}}"></label>
-                    <a class="btn btn-danger" href="{{url('restore', $product['id'])}}">supprimer ce produit</a>
+                    <a class="btn btn-danger" href="{{url('cart/restore', $product['id'])}}">supprimer ce produit</a>
                 </li>             
             @empty
             @endforelse
@@ -24,7 +24,7 @@
     <div class="form-submit">
         @if(!empty($products))
             <p><span class="total">Total: {{$total}} €</span></p>
-            <a href="{{url('reset')}}" class="deleteAllProducts" >supprimer tout les produits</a>
+            <a href="{{url('cart/reset')}}" class="deleteAllProducts" >supprimer tout les produits</a>
             <input name="submit" type="submit" value="Valider le panier">
         @else
             <p>Votre panier en vide !</p>

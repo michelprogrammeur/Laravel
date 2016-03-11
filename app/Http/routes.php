@@ -37,13 +37,14 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('send', 'FrontController@sendContact');
 	Route::any('login', 'LoginController@login'); // get et post
 	Route::get('logout', 'LoginController@logout'); // get et post
-	Route::post('command', 'FrontController@storeProduct');
-	Route::post('storeCommand', 'FrontController@commandCart');
-
-	Route::get('cart', 'FrontController@showCart');
 	
-	Route::get('reset', 'FrontController@reset');
-	Route::get('restore/{id}', 'FrontController@restoreProduct');
+	Route::controller('cart', 'CartController');
+
+	/*Route::post('command', 'CartController@storeProduct');
+	Route::post('storeCommand', 'CartController@commandCart');
+	Route::get('cart', 'CartController@showCart');
+	Route::get('reset', 'CartController@reset');
+	Route::get('restore/{id}', 'CartController@restoreProduct');*/
 	
 	Route::group(['middleware' => ['auth']], function () {
 		Route::get('dashboard', 'FrontController@dashboard');

@@ -60,4 +60,9 @@ class SessionStorage implements IStorage
 	public function get() {
 		return $this->storage;
 	}
+
+	public function count() {
+	
+		return count($this->storage);
+	}
 }

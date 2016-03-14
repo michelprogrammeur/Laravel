@@ -22,7 +22,7 @@ class FrontController extends Controller
             $products = Cache::get('products');
         }else {
             $products = Product::with('tags', 'picture', 'category')->paginate(10);
-            Cache::put('products', $products, 1); 
+            Cache::put('products', $products, env('TIME_CACHE', 5)); 
         }
 
     	return view('front.index', compact('products'));
@@ -35,8 +35,25 @@ class FrontController extends Controller
 
     }
 
-    public function showProductByCategory($id, $slug=''){
-    	$products = Category::find($id)->products;
+    public function showProductByCategory($id, $slug='', Request $request){
+        
+        $pageId = $request->get('page') ? $request->get('page') : '';
+        $key = $request->path().$pageId; // uri
+
+        //dd($key);
+
+        $category = Category::findOrFail($id);
+        $title = $category->title;
+        //$products = Category::find($id)->products;
+
+        if (Cache::has($key)) {
+            $products = Cache::get($key);
+        }else {
+            $products = $category->products()->with('tags', 'category', 'picture')->paginate(5);
+
+            Cache::put($key, $products, env('TIME_CACHE', 5));
+        }
+
 
     	return view('front.category', compact('products'));
 

@@ -1,0 +1,114 @@
+
+.productCategory {
+	display: inline-block;
+	min-height: 540px;
+	vertical-align: top;
+	position: relative;
+	width: 400px;
+	background-color: #ffffff;
+	box-shadow: 0px 3px 4px 0px #eeeeee;
+	border-radius: 2px;
+	margin: 12px;
+
+	.titleCatProduct {
+		background-color: #20D990;
+		padding: 10px 16px;
+		margin: 0;
+		a {
+			font-weight: 700;
+			font-size: 20px;
+			text-decoration: none;
+			color: #ffffff;
+		}
+	}
+
+	.catIconeLoupe {
+		text-align: center;
+		padding: 11px 18px;
+		display: block;
+		position: absolute;
+		right: 40px;
+		top: 30px;
+		border-radius: 50%;
+		background-color: #ffffff;
+		font-size: 24px;
+		text-decoration: none;
+		transition: 0.1s;
+		.icon-zoom-in {
+			color: #00AB72;
+		}
+	}
+	.catIconeLoupe:hover {
+		padding: 10px 16px;
+		font-size: 20px;
+		transition: 0.1s;
+		right: 44px;
+		top: 34px;
+	}
+
+	.containerCatProduct {
+		padding: 0 20px 20px 20px;
+		.catProductAbstract {
+			padding: 24px 0;
+			font-family: "roboto", verdana, arial, sans-serif;
+			font-size: 12px;
+			color: #878787;
+			letter-spacing: 1.2px;
+		}
+		.catProductContainer {
+			position: absolute;
+			bottom: 20px;
+			left: 20px;
+			width: 100%;
+			display: block;
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+			li {
+				width: 50%;
+				list-style-type: none;
+				display: inline-block;
+				box-sizing: border-box;
+			}
+			.catProductPrice {
+				font-size: 26px;
+				font-weight: bold;
+				span {
+					padding: 10px 14px 0 14px;
+					display: inline-block;
+					color: #FF0115;
+				}
+			}
+			.catProductQuantity {
+				font-size: 16px;
+				color: #b1b1b1;
+			}
+		}
+		.catProductCategory {
+			position: absolute;
+			left: 0;
+			top: 225px;
+			padding: 7px 20px; 
+			background-color: #FF0115;
+			text-transform: uppercase;
+			color: #ffffff;
+		}
+
+		.catProductTitleTags {
+			display: inline-block;
+			padding: 10px 10px 10px 0;
+		}
+		.catProductTags {
+			margin: 0 3px;
+			display: inline-block;
+			background-color: #f7f7f7;
+			padding: 10px;
+			border-radius: 3px; 
+			color: #5c5c5c;
+			font-size: 11px;
+			margin: 10px 0;
+		}
+	}
+	
+}
+

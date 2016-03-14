@@ -4,6 +4,63 @@
 /* 
 modules
 	/_header.scss */
+body {
+	padding: 0;
+	margin: 0;
+	background-color: #fdfdfd;
+}
+.sidebar {
+	width: 16%;
+	//background-color: #ffffff;
+	p {
+		padding: 10px;
+		background-color: #323232;
+		color: #ffffff;
+		margin: 0 20px;
+		display: inline-block;
+	}
+}
+.sidebarTitle {
+	padding:  40px 20px 10px 20px;
+	text-transform: uppercase;
+	color: #878787;
+	margin: 0;
+}
+.product {
+	padding-top: 20px;
+	width: 80%;
+}
+.pagination {
+	width: 100%;
+	display: block;
+	padding: 0 0 0 7px ;
+	li {
+		list-style-type: none;
+		display: inline-block;
+		padding: 10px 16px;
+		text-align: center;
+		background-color: #eeeeee;
+		margin: 5px;
+		color: #090909;
+		font-weight: bold;
+		a {
+			text-decoration: none;
+		}
+	}
+	.active {
+		background-color: #FF0115;
+		color: #ffffff;
+	}
+}
+
 @import "modules/variables";
+@import "modules/productCategory";
 @import "modules/nav";
 @import "modules/showCart";
+@import "modules/contact";
+@import "modules/login";
+@import "modules/showProduct";
+@import "modules/indexAdmin";
+
+
+

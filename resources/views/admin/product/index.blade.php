@@ -44,7 +44,7 @@
 	        			{{ method_field('DELETE') }} <!--champ hidden _method value DELETE -->
 
 	        			{{ csrf_field() }}
-	        			<input class="delete" type="submit" value="Delete" />
+	        			<input class="indexDelete" class="delete" type="submit" value="Delete" />
 	        		</form>
 	        	</td>
 			</tr>

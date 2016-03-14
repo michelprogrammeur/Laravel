@@ -3,31 +3,33 @@
 @section('content')
 <form class="form-panier" method="POST" action="{{url('cart/store')}}">
     {{csrf_field()}}
-    <ul class="showCartProduct">
-        <div>
-            @forelse($products as $product)
-                <input type="hidden" name="product_id[]" value="{{$product['id']}}" />
-                <input type="hidden" name="quantity{{$product['id']}}" value="{{$product['quantity']}}" />
+    <ul>
+        @forelse($products as $product)
+        <div class="showCartProduct">
+            <input type="hidden" name="product_id[]" value="{{$product['id']}}" />
+            <input type="hidden" name="quantity{{$product['id']}}" value="{{$product['quantity']}}" />
 
-                <li class="titleProduct">{{$product['name']}}</li>
-                <li class="price">{{$product['price']}}</li> 
-                <li><p class="quantity">Qts: {{$product['quantity']}}</p></li>
-                <li>{{$product['total']}}</li> 
-                <li>
-                    <label for="reset{{$product['id']}}"></label>
-                    <a class="btn btn-danger" href="{{url('cart/restore', $product['id'])}}">supprimer ce produit</a>
-                </li>             
-            @empty
-            @endforelse
-        </div>
+            <li class="titleProduct">{{$product['name']}}</li>
+            <li class="price">{{$product['price']}} €</li> 
+            <li><p class="quantity">Qts: {{$product['quantity']}}</p></li>
+            <li class="showCartProductTotalOnePdt">{{$product['total']}} €</li> 
+            <li>
+                <label for="reset{{$product['id']}}"></label>
+                <a class="showCartProductDltOne" href="{{url('cart/restore', $product['id'])}}"><i class="fa fa-times"></i></a>
+            </li>
+        </div>             
+        @empty
+        @endforelse
     </ul>
     <div class="form-submit">
         @if(!empty($products))
-            <p><span class="total">Total: {{$total}} €</span></p>
-            <a href="{{url('cart/reset')}}" class="deleteAllProducts" >supprimer tout les produits</a>
-            <input name="submit" type="submit" value="Valider le panier">
+            <div>
+                <p><span class="total">Total: {{$total}} €</span></p>
+                <a href="{{url('cart/reset')}}" class="deleteAllProducts" >supprimer tout les produits</a>
+            </div>
+            <input class="showCartProductBtnSumit" name="submit" type="submit" value="Valider le panier">
         @else
-            <p>Votre panier en vide !</p>
+            <p class="showCartProductMsgEmpty">Votre panier en vide !</p>
         @endif
         
     </div>

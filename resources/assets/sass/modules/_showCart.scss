@@ -1,31 +1,48 @@
-
+.form-panier {
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+}
 .showCartProduct {
+	position: relative;
+	margin:  0 0 20px 0;
 	padding: 0;
 	display: block;
 	width: 50%;
-	background-color: #fdfdfd;
-	border: 1px solid #f1f1f1;
+	background-color: #ffffff;
+	box-shadow: 0px 3px 4px #eeeeee;
 	li {
-		width: 100%;
-		padding: 10px;
-		display: block;
+		padding: 14px 20px;
+		list-style-type: none;
 		.quantity {
-			font-size: 11px;
-			color: #232323;
+			font-size: 12px;
+			color: #878787;
 			padding-bottom: 15px;
-			border-bottom: 2px dashed #eeeeee;
+			border-bottom: 2px dashed #f1f1f1;
+			display: block;
 		}
 	}
 	.price {
-		padding: 10px 10px 0 10px;
-		font-size: 16px;
+		padding: 20px 20px 10px 20px;
+		font-size: 20px;
+		font-weight: bold;
 		color: #232323;
+		display: block;
 	}
 	.titleProduct{
 		background-color: #06052E;
 		font-family: verdana;
 		font-size: 20px;
-		color: #ffffff;
+		padding: 10px; 
+		color: #ffffff; 
+		display: block;
+	}
+	.showCartProductTotalOnePdt {
+		color: #FF0115;
+		border: 1px solid #FF0115;
+		margin: 0 0 0 20px;
+		display: inline-block;
 	}
 }
 .total {
@@ -35,17 +52,25 @@
 	padding: 14px;
 	color: #ffffff;
 	font-weight: bold;
-	background-color: #FF002A;
+	background-color: #C60115;
+	margin-right: 20px;
 }
 
 .info {
-	padding: 20px 12px 10px 12px;
+	padding: 20px 16px 10px 16px;
 	p {
 		width: 100%;
 	}
 }
 .form-submit {
+	width: 100%;
 	display: inline-block;
+	div {
+		display: block;
+		p {
+			display: inline-block;
+		}
+	}
 	.deleteAllProducts {
 		padding: 12px;
 		background: none;
@@ -55,4 +80,45 @@
 		font-weight: 700;
 		color: #090909;
 	}
+}
+.showCartProductMsgEmpty {
+	display: block;
+	font-weight: bold;
+	font-size: 26px;
+	color: #090909;
+}
+
+.showCartProductBtnSumit  {
+	background-color: #eeeeee;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #090909;
+	padding: 16px 20px;
+	margin: 30px 0 20px 0;
+	transition: 0.3s;
+}
+.showCartProductBtnSumit:hover {
+	background-color: #FF0115;
+	color: #ffffff;
+	transition: 0.3s;
+}
+
+.showCartProductDltOne {
+	display: block;
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	font-size: 16px;
+	text-align: center;
+	border-radius: 50%;
+	padding: 6.3px 12px;
+	background-color: #FF0115;
+	color: #ffffff;
+	transition: 0.5s;
+}
+.showCartProductDltOne:hover {
+	color: #ffffff;
+	transition: 0.5s;
+	transform: rotate(180deg);
 }
